@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_neighbour_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f0f0f0"
+    tools:context=".ui.neighbour_list.NeighbourDetailActivity">
+
+    <ImageView
+        android:id="@+id/neighbour_picture"
+        android:layout_width="412dp"
+        android:layout_height="196dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="?attr/actionModeCloseDrawable"
+        tools:srcCompat="@color/colorPrimaryDark" />
+
+    <ImageView
+        android:id="@+id/return_button"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_margin="10dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:tint="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="?attr/actionModeCloseDrawable" />
+
+    <TextView
+        android:id="@+id/name_on_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textColor="#ffffff"
+        android:textSize="35sp"
+        android:text="Prénom"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/neighbour_picture"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/favorites_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#cccccc"
+        android:clickable="true"
+        android:focusable="true"
+        app:backgroundTint="#cccccc"
+        app:layout_constraintBottom_toTopOf="@id/neighbour_picture"
+        app:layout_constraintEnd_toEndOf="@id/neighbour_picture"
+        app:layout_constraintTop_toBottomOf="@id/neighbour_picture"
+        app:layout_constraintVertical_bias="0.086"
+        app:rippleColor="#FFFFFF" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/neighbour_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:minHeight="100dp"
+        app:layout_constraintTop_toBottomOf="@id/neighbour_picture">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/first_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="5dp"
+                android:text="Prénom"
+                android:textColor="#000000"
+                android:textSize="25sp" />
+
+            <View
+                android:id="@+id/separator"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CCCCCC" />
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
+
+                <ImageView
+                    android:id="@+id/img_town"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:padding="5dp"
+                    app:layout_constraintBottom_toTopOf="@id/img_phone_number"
+                    app:layout_constraintRight_toLeftOf="@id/town"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/localisation" />
+
+                <TextView
+                    android:id="@+id/town"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:padding="@dimen/appbar_padding_top"
+                    android:text="Ville"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toTopOf="@id/phone_number"
+                    app:layout_constraintStart_toEndOf="@id/img_town"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/img_phone_number"
+                    android:layout_width="40dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:padding="@dimen/appbar_padding_top"
+                    android:tint="@color/colorAccent"
+                    app:layout_constraintBottom_toTopOf="@id/img_facebook"
+                    app:layout_constraintRight_toLeftOf="@id/phone_number"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/img_town"
+                    app:srcCompat="@android:drawable/stat_sys_phone_call" />
+
+                <TextView
+                    android:id="@+id/phone_number"
+                    android:layout_width="200dp"
+                    android:layout_height="34dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:padding="@dimen/appbar_padding_top"
+                    android:text="Numéro de téléphone"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toTopOf="@id/facebook"
+                    app:layout_constraintStart_toEndOf="@id/img_phone_number"
+                    app:layout_constraintTop_toBottomOf="@id/town" />
+
+                <ImageView
+                    android:id="@+id/img_facebook"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:padding="@dimen/appbar_padding_top"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/facebook"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/img_phone_number"
+                    app:srcCompat="@drawable/globe" />
+
+                <TextView
+                    android:id="@+id/facebook"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:padding="@dimen/appbar_padding_top"
+                    android:text="www.facebook.fr/prénom"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/img_facebook"
+                    app:layout_constraintTop_toBottomOf="@id/phone_number" />
+
+            </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/description"
+        android:layout_width="381dp"
+        android:layout_height="145dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/neighbour_details">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/myDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="A propos de moi"
+                android:textColor="@android:color/black"
+                android:textSize="25sp" />
+
+            <View
+                android:id="@+id/separator1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CCCCCC" />
+
+            <TextView
+                android:id="@+id/description_text"
+                android:layout_width="match_parent"
+                android:layout_height="105dp"
+                android:text="Votre description"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</android.support.constraint.ConstraintLayout>
