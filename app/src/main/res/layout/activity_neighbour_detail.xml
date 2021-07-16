@@ -49,6 +49,7 @@
         android:backgroundTint="#cccccc"
         android:clickable="true"
         android:focusable="true"
+        android:src="@drawable/ic_baseline_star_24"
         app:backgroundTint="#cccccc"
         app:layout_constraintBottom_toTopOf="@id/neighbour_picture"
         app:layout_constraintEnd_toEndOf="@id/neighbour_picture"

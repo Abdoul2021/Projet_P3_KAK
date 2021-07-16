@@ -58,6 +58,7 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
             }
         });
 
+        //Access to neighbour' detail
         holder.mFragmentNeighbourLayout.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {
