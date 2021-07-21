@@ -55,8 +55,8 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour, 1));
-                Toast.makeText(mContext.getApplicationContext(), "suppression", Toast.LENGTH_LONG).show();
+                EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour, 0));
+
             }
         });
 
