@@ -67,7 +67,6 @@ public class NeighbourDetailActivity extends AppCompatActivity {
         } else mFavoritesButton.setImageResource(R.drawable.ic_baseline_star_24);
 
         //Favorite Button (action)
-
         mFavoritesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -57,7 +57,7 @@ public class NeighbourServiceTest {
 
     //Get a favorite with success
     @Test
-    public void getFavoriteNeighboursWithSuccess() {
+    public void getNeighboursFavoritesWithSuccess() {
         List<Neighbour> expectedFavoritesNeighbours = service.getNeighboursFavorites();
         assertTrue(expectedFavoritesNeighbours.isEmpty());
         }
