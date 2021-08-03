@@ -1,5 +1,6 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
@@ -19,6 +20,7 @@ import com.openclassrooms.entrevoisins.model.Neighbour;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -44,7 +46,7 @@ public class MyFavRecyclerViewAdapter extends RecyclerView.Adapter<MyFavRecycler
     }
 
     @Override
-    public void onBindViewHolder(final MyFavRecyclerViewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final MyFavRecyclerViewAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Neighbour neighbour = mNeighbours.get(position);
         holder.mNeighbourName.setText(neighbour.getName());
         Glide.with(holder.mNeighbourAvatar.getContext())
@@ -52,18 +54,16 @@ public class MyFavRecyclerViewAdapter extends RecyclerView.Adapter<MyFavRecycler
                 .apply(RequestOptions.circleCropTransform())
                 .into(holder.mNeighbourAvatar);
 
-        holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour, 1));
-            }
-        });
-        holder.mFavoriteNeighFrag.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(mContext, NeighbourDetailActivity.class);
-                mContext.startActivity(intent);
-            }
+        //Modified compared to MyNeighbourRecyclerViewAdapter (Fragment : 1 instead of 0)
+        holder.mDeleteButton.setOnClickListener(v -> EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour, 1)));
+
+        //Access to neighbour' detail
+        holder.mFavoriteNeighFrag.setOnClickListener(view -> {
+            Intent intent = new Intent(mContext, NeighbourDetailActivity.class);
+            intent.putExtra("position", position);
+            intent.putExtra("fragment", "neighbourfav");
+            intent.putExtra("neighbour", neighbour);
+            mContext.startActivity(intent);
         });
     }
 

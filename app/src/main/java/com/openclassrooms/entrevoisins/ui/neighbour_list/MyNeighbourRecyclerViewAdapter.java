@@ -52,22 +52,14 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
                 .apply(RequestOptions.circleCropTransform())
                 .into(holder.mNeighbourAvatar);
 
-        holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour, 0));
-
-            }
-        });
+        holder.mDeleteButton.setOnClickListener(v -> EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour, 0)));
 
         //Access to neighbour' detail
-        holder.mFragmentNeighbourLayout.setOnClickListener((new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent (mContext, NeighbourDetailActivity.class);
-                intent.putExtra("position", position);
-                mContext.startActivity(intent);
-            }
+        holder.mFragmentNeighbourLayout.setOnClickListener((view -> {
+            Intent intent = new Intent (mContext, NeighbourDetailActivity.class);
+            intent.putExtra("position", position);
+            intent.putExtra("fragment", "neighbour");
+            mContext.startActivity(intent);
         }));
     }
 

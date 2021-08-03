@@ -43,16 +43,25 @@ public class NeighbourServiceTest {
         assertFalse(service.getNeighbours().contains(neighbourToDelete));
     }
 
-    //Four methods added : getNeighbourByPosition, getNeighboursFavorites, addNeighbourFavorites, deleteNeighbourFavorites
 
-    // Get a neighbour by position with success
-
+     // Get a neighbour by position with success
     @Test
     public void getNeighbourByPositionWithSuccess(){
         int position = 1;
         Neighbour expectedNeighbour = service.getNeighbourByPosition(position);
         Neighbour neighbour = service.getNeighbours().get(position);
         assertEquals(expectedNeighbour.getName(), neighbour.getName());
+    }
+
+    // Get a favorite by position with success
+    @Test
+    public void getNeighbourFavoriteByPositionWithSuccess() {
+        int position = 0;
+        Neighbour neighbour=service.getNeighbours().get(position);
+        service.addNeighbourFavorites(neighbour);
+        Neighbour expectedNeighbour = service.getNeighbourByPosition(position);
+        Neighbour favoriteNeighbour =service.getNeighbourFavoriteByPosition(position);
+        assertEquals(expectedNeighbour.getName(), favoriteNeighbour.getName());
     }
 
     //Get a favorite with success

@@ -12,7 +12,11 @@ import com.bumptech.glide.Glide;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.model.Neighbour;
+import com.openclassrooms.entrevoisins.service.DummyNeighbourGenerator;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,7 +34,11 @@ public class NeighbourDetailActivity extends AppCompatActivity {
     @BindView(R.id.favorites_button) FloatingActionButton mFavoritesButton;
 
     private Neighbour mNeighbour;
+    private Neighbour neighbour;
     private NeighbourApiService mApiService;
+    public String frag;
+
+    List<Neighbour> favNeigh= new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,28 +46,40 @@ public class NeighbourDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_neighbour_detail);
         ButterKnife.bind(this);
         int position = getIntent().getIntExtra("position", 0);
-
+        frag = getIntent().getStringExtra("fragment");
+        neighbour = getIntent().getParcelableExtra("neighbour");
         mApiService = DI.getNeighbourApiService();
-        mNeighbour = mApiService.getNeighbourByPosition(position);
 
-        //Details
-        mNameOnPicture.setText(mNeighbour.getName());
-        mFirstName.setText(mNeighbour.getName());
-        mTown.setText(mNeighbour.getAddress());
-        mPhoneNumber.setText(mNeighbour.getPhoneNumber());
-        mFacebook.setText("www.facebook.fr/" + mNeighbour.getName());
-        mDescriptionText.setText(mNeighbour.getAboutMe());
+        //Details for neighbour and favorite
+        if(frag.equals("neighbour")){
+            mNeighbour = mApiService.getNeighbourByPosition(position);
+            //Details
+            mNameOnPicture.setText(mNeighbour.getName());
+            mFirstName.setText(mNeighbour.getName());
+            mTown.setText(mNeighbour.getAddress());
+            mPhoneNumber.setText(mNeighbour.getPhoneNumber());
+            mFacebook.setText("www.facebook.fr/" + mNeighbour.getName());
+            mDescriptionText.setText(mNeighbour.getAboutMe());
+            //Picture
+            Glide.with(this).load(mNeighbour.getAvatarUrl()).centerCrop().into(mNeighbourPicture);
 
-        //Picture
-        Glide.with(this).load(mNeighbour.getAvatarUrl()).centerCrop().into(mNeighbourPicture);
+        }else if (frag.equals("neighbourfav")){
+            mNeighbour = mApiService.getNeighbourFavoriteByPosition(position);
+            //Details for favorite
+            mNameOnPicture.setText(neighbour.getName());
+            mFirstName.setText(neighbour.getName());
+            mTown.setText(neighbour.getAddress());
+            mPhoneNumber.setText(neighbour.getPhoneNumber());
+            mFacebook.setText("www.facebook.fr/" + neighbour.getName());
+            mDescriptionText.setText(neighbour.getAboutMe());
+            //Picture for favorite
+            Glide.with(this).load(neighbour.getAvatarUrl()).centerCrop().into(mNeighbourPicture);
+        }
 
         //Return button
-        mReturnButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { onBackPressed();
-                Toast.makeText(getApplicationContext(), "Tu retournes dans la liste des voisins", Toast.LENGTH_SHORT).show();
-            }
-            });
+        mReturnButton.setOnClickListener(v -> { onBackPressed();
+            Toast.makeText(getApplicationContext(), "Tu quittes la page de " + mNeighbour.getName(), Toast.LENGTH_SHORT).show();
+        });
 
         //Favorite Button (style)
         if ( ! mApiService.getNeighboursFavorites().contains(mNeighbour)) {
@@ -67,21 +87,25 @@ public class NeighbourDetailActivity extends AppCompatActivity {
         } else mFavoritesButton.setImageResource(R.drawable.ic_baseline_star_24);
 
         //Favorite Button (action)
-        mFavoritesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if ( ! mApiService.getNeighboursFavorites().contains(mNeighbour)) {
-                    mApiService.addNeighbourFavorites(mNeighbour);
-                }
-                if ( mApiService.getNeighboursFavorites().contains(mNeighbour))
-                {    mFavoritesButton.setImageResource(R.drawable.ic_baseline_star_24);
-                    Toast.makeText(getApplicationContext(), mNeighbour.getName() + " est maintenant dans ta liste de favoris !", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    mFavoritesButton.setImageResource(R.drawable.ic_baseline_star_border_24);
-                    Toast.makeText(getApplicationContext(), mNeighbour.getName() + " n'est plus dans ta liste de favoris !", Toast.LENGTH_SHORT).show();
-                }
+        mFavoritesButton.setOnClickListener(view -> {
+            if ( ! mApiService.getNeighboursFavorites().contains(mNeighbour)) {
+                mApiService.addNeighbourFavorites(mNeighbour);
+
+            }
+            if ( mApiService.getNeighboursFavorites().contains(mNeighbour))
+            {    mFavoritesButton.setImageResource(R.drawable.ic_baseline_star_24);
+                Toast.makeText(getApplicationContext(), mNeighbour.getName() + " est maintenant dans la liste des favoris !", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                mFavoritesButton.setImageResource(R.drawable.ic_baseline_star_border_24);
             }
         });
+    }
 
-    }}
+    @Override
+    public void onResume() {
+        super.onResume();
+
+    }
+
+}

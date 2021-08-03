@@ -1,5 +1,6 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
+
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
+import com.openclassrooms.entrevoisins.service.DummyNeighbourApiService;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
 import org.greenrobot.eventbus.EventBus;
@@ -28,8 +30,8 @@ import butterknife.ButterKnife;
 
 public class FavoriteNeighbourFragment extends Fragment {
 
-        @BindView(R.id.favorite_neighbour_fragment)
-        RecyclerView mFavoriteNeighbourFragment;
+        //@BindView(R.id.favorite_neighbour_fragment)
+        public static RecyclerView mFavRecyclerView;
 
         private NeighbourApiService mApiService;
         private List<Neighbour> mNeighbours;
@@ -52,20 +54,23 @@ public class FavoriteNeighbourFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.favorite_neighbour_fragment, container, false);
-        ButterKnife.bind(this, view);
+
+        //ButterKnife.bind(this, view);
+        mFavRecyclerView= view.findViewById(R.id.favorite_neighbour_fragment);
         defineRecyclerView();
         Context context = view.getContext();
-        mFavoriteNeighbourFragment = (RecyclerView) view;
-        mFavoriteNeighbourFragment.setLayoutManager(new LinearLayoutManager(context));
-        mFavoriteNeighbourFragment.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-        mFavoriteNeighbourFragment.setAdapter(new MyFavRecyclerViewAdapter(mNeighbours , getContext()));
-        ;
+        MyFavRecyclerViewAdapter favAdapt= new MyFavRecyclerViewAdapter(mNeighbours , getContext());
+        mFavRecyclerView = (RecyclerView) view;
+        mFavRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+        mFavRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        mFavRecyclerView.setAdapter(favAdapt);
+
         return view;
     }
 
     private void defineRecyclerView(){
         this.mNeighbours = new ArrayList<>();
-        this.mFavoriteNeighbourFragment.setLayoutManager(new LinearLayoutManager(getActivity()));
+        this.mFavRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     /**
@@ -74,7 +79,7 @@ public class FavoriteNeighbourFragment extends Fragment {
      */
     private void initList() {
         mNeighbours = mApiService.getNeighboursFavorites();
-        mFavoriteNeighbourFragment.setAdapter(new MyFavRecyclerViewAdapter(mNeighbours, getContext()));
+        mFavRecyclerView.setAdapter(new MyFavRecyclerViewAdapter(mNeighbours, getContext()));
     }
 
     @Override
@@ -99,6 +104,7 @@ public class FavoriteNeighbourFragment extends Fragment {
      * Fired if the user clicks on a delete button
      * @param event
      */
+    //Modified compared to NeighbourFragment (Fragment : 1 instead of 0 ; deleteNeighbourFavorites instead of deleteNeighbour)
     @Subscribe
     public void onDeleteNeighbour(DeleteNeighbourEvent event) {
         if (event.fragment == 1) {
