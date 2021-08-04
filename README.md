@@ -15,7 +15,7 @@ Compile Sdk Version
 28 (API 28: Android 9.0 (Pie))
 
 Code de l’application
-- Accéder au code à partir du lien suivant : https://github.com/Abdoul2021/PROJET_3.git
+- Accéder au code à partir du lien suivant : https://github.com/Abdoul2021/Projet_P3_KAK.git
 - Télécharger ou cloner le code à partir du bouton Code
 
 - Lancer Android Studio et y importer le code
@@ -27,13 +27,13 @@ Fonctionnalités présentes dans l’application Entrevoisins
 - Ajouter un voisin
 - Supprimer un voisin
 
-Fonctionnalités développées dans l’application Entrevoisins :
-- Afficher les détails d’un voisin : clic sur un voisin de la liste des voisins
-- Retourner à la liste des voisins (ou quitter les détails du voisin) : clic sur le bouton de retour à l'élément précédent (ReturnButton)
+Fonctionnalités développées dans l’application Entrevoisins:
+- Afficher les détails d’un voisin: clic sur un voisin de la liste des voisins
+- Retourner à la liste des voisins (ou quitter les détails du voisin): clic sur le bouton de retour à l'élément précédent (ReturnButton)
 - Lister mes voisins dans l’onglet Favoris
-  o ajouter un voisin dans la liste des favoris : clic sur le bouton d’ajout du voisin à la liste des favoris (FavoritesButton)
-  o afficher les détails d’un voisin favori : clic sur un voisin de la liste des favoris
-  o supprimer un voisin de la liste des favoris : clic sur le bouton de suppression de la liste des favoris
+  o ajouter un voisin dans la liste des favoris: clic sur le bouton d’ajout du voisin à la liste des favoris (FavoritesButton)
+  o afficher les détails d’un voisin favori: clic sur un voisin de la liste des favoris
+  o supprimer un voisin de la liste des favoris: clic sur le bouton de suppression de la liste des favoris
 
 Tests unitaires développés dans l’application Entrevoisins
 - getNeighbourByPositionWithSuccess
@@ -41,10 +41,3 @@ Tests unitaires développés dans l’application Entrevoisins
 - getNeighboursFavoritesWithSuccess
 - addFavoriteNeighboursWithSuccess
 - deleteFavoriteNeighbourWithSuccess
-
-Tests instrumentalisés développés dans l’application Entrevoisins
-- Test vérifiant que lorsqu’on clique sur un utilisateur de la liste, l’écran de détails est bien lancé : NeighbourDetailActivity_isLaunchedWhenWeClickOnAnItem
-- Test vérifiant qu’au démarrage de cet écran, le TextView indiquant le nom de cet utilisateur est bien rempli : textViewIndicatingTheName_isCorrectlyFilled
-- Test vérifiant que l’onglet Favoris n’affiche que les voisins marqués comme favoris : favoritesTab_onlyDisplaysNeighborsMarkedAsFavorites
- 
-
